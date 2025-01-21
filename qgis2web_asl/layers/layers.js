@@ -13,6 +13,25 @@ var wms_layers = [];
                 url: 'https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}'
             })
         });
+
+
+        var lyr_wodypolskie = new ol.layer.Tile({
+            source: new ol.source.TileWMS(({
+              url: "https://wody.isok.gov.pl/gpservices/KZGW/MZP20_Predkosc_WysokiePrawdopodPowodzi/MapServer/WMSServer?",
+              attributions: 'GUGiK',
+              params: {
+                "LAYERS": "5",
+                "TILED": "true",
+                "VERSION": "1.3.0"},
+            })),
+            title: 'wody powierzchniowe',
+            opacity: 1.000000,
+
+          });
+
+wms_layers.push([lyr_wodypolskie, 0]);
+
+
 var format_c2002_HYDRO_WODY_POWIE_merge_1 = new ol.format.GeoJSON();
 var features_c2002_HYDRO_WODY_POWIE_merge_1 = format_c2002_HYDRO_WODY_POWIE_merge_1.readFeatures(json_c2002_HYDRO_WODY_POWIE_merge_1, 
             {dataProjection: 'EPSG:4326', featureProjection: 'EPSG:2180'});
@@ -79,8 +98,21 @@ var lyr_siatka_4 = new ol.layer.Vector({
     <img src="styles/legend/siatka_4_4.png" /> 33,5 - 100<br />'
         });
 
-lyr_GoogleSatellite_0.setVisible(true);lyr_c2002_HYDRO_WODY_POWIE_merge_1.setVisible(true);lyr_wody_pow_bug_sentinel_2.setVisible(true);lyr_bug_historyczna_1940_3.setVisible(true);lyr_siatka_4.setVisible(true);
-var layersList = [lyr_GoogleSatellite_0,lyr_c2002_HYDRO_WODY_POWIE_merge_1,lyr_wody_pow_bug_sentinel_2,lyr_bug_historyczna_1940_3,lyr_siatka_4];
+lyr_GoogleSatellite_0.setVisible(true);
+lyr_c2002_HYDRO_WODY_POWIE_merge_1.setVisible(true);
+lyr_wody_pow_bug_sentinel_2.setVisible(true);
+lyr_bug_historyczna_1940_3.setVisible(true);
+lyr_siatka_4.setVisible(true);
+lyr_wodypolskie.setVisible(true);
+
+var layersList = [
+    lyr_GoogleSatellite_0,
+    lyr_wodypolskie,
+    lyr_c2002_HYDRO_WODY_POWIE_merge_1,
+    lyr_wody_pow_bug_sentinel_2,
+    lyr_bug_historyczna_1940_3,
+    lyr_siatka_4];
+
 lyr_c2002_HYDRO_WODY_POWIE_merge_1.set('fieldAliases', {'OBJECTID': 'OBJECTID', 'DLUG_BRZEG': 'DLUG_BRZEG', 'DLUGOSC': 'DLUGOSC', 'DOKLADNOSC': 'DOKLADNOSC', 'DOSTEPNOSC': 'DOSTEPNOSC', 'GLEBOKOSC': 'GLEBOKOSC', 'ISTNIENIE': 'ISTNIENIE', 'KAT_HYDRO': 'KAT_HYDRO', 'KAT_PLYWU': 'KAT_PLYWU', 'KAT_POJEMN': 'KAT_POJEMN', 'KAT_POLOZ': 'KAT_POLOZ', 'KAT_WODY': 'KAT_WODY', 'NAJW_WYS': 'NAJW_WYS', 'NAZWA': 'NAZWA', 'OBIEKT': 'OBIEKT', 'OPR_UPUST': 'OPR_UPUST', 'OPR_ZBURZ': 'OPR_ZBURZ', 'POCH_HYDRO': 'POCH_HYDRO', 'PRED_PRZEP': 'PRED_PRZEP', 'SREDNIA_GL': 'SREDNIA_GL', 'STAT_EKSPL': 'STAT_EKSPL', 'SZEROKOSC': 'SZEROKOSC', 'TAJNOSC': 'TAJNOSC', 'TYP_AKWED': 'TYP_AKWED', 'TYP_WYBRZ': 'TYP_WYBRZ', 'ZN_ORIENT': 'ZN_ORIENT', 'POWIERZCHN': 'POWIERZCHN', 'ID': 'ID', 'Shape_Length': 'Shape_Length', 'Shape_Area': 'Shape_Area', });
 lyr_wody_pow_bug_sentinel_2.set('fieldAliases', {'OBJECTID': 'OBJECTID', 'Id': 'Id', 'gridcode': 'gridcode', 'Shape_Length': 'Shape_Length', 'Shape_Area': 'Shape_Area', 'pow': 'pow', 'obw': 'obw', 'wsp_zw': 'wsp_zw', });
 lyr_bug_historyczna_1940_3.set('fieldAliases', {'OBJECTID': 'OBJECTID', 'Id': 'Id', 'Shape_Length': 'Shape_Length', 'Shape_Area': 'Shape_Area', 'pow': 'pow', 'obw': 'obw', 'wsp_zw': 'wsp_zw', });
